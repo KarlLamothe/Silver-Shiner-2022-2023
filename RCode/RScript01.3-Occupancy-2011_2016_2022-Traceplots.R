@@ -1,13 +1,16 @@
 ################################################################################
-# Traceplots
 ################################################################################
-# load packages
-library(pacman)     # downloads and loads packages simultaneously
-p_load(coda)        # Traceplots/Includes Discharge
+# Inspecting traceplots
+# RScript01.3-Occupancy-2011_2016_2022-Traceplots.R 
+# This is Script 3 of occupancy modelling
+# This script is used to print traceplots for single-species occupancy models 
+# built for Silver Shiner using data collected from 16 Mile Creek in 2011, 2016, 
+# and 2022.
+################################################################################
+################################################################################
+library(coda)
 
-#####################################################################
 # Load results
-#####################################################################
 load("Results/2011-2016-2022/Models/out1-2011_2016_2022-3-2024-12-03.R")
 load("Results/2011-2016-2022/Models/out2-2011_2016_2022-3-2024-12-03.R")
 load("Results/2011-2016-2022/Models/out3-2011_2016_2022-3-2024-12-03.R")
@@ -44,9 +47,7 @@ out4.trace <- create_trace_lists(out4, n.chains)
 out5.trace <- create_trace_lists(out5, n.chains)
 out6.trace <- create_trace_lists(out6, n.chains)
 
-#### Function to create alpha and beta traceplots individually by chains for
 #### spatial models ####
-
 create_trace_lists.sp <- function(out, n.chains) {
   n.post.samples     <- out$n.post
   beta.samples.list  <- list()
@@ -70,8 +71,6 @@ out2.sp.trace <- create_trace_lists.sp(out.sp2, n.chains)
 out3.sp.trace <- create_trace_lists.sp(out.sp3, n.chains)
 out4.sp.trace <- create_trace_lists.sp(out.sp4, n.chains)
 
-#################################################
-## PLOTS #
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 ## MODEL 1 # occ ~ 1, det ~ 1               #
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
@@ -139,7 +138,7 @@ plot(out6.trace$beta.samples,  density = TRUE, las=1)
 dev.off()
 
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-## SPATIAL MODEL 1 # occ ~ 1, det ~ 1       #
+## SPATIAL MODEL 1
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 tiff("Results/2011-2016-2022/Traceplots/SPM1_det_2011_2016_2022.tiff", res=800, height=3, width=7.5, units='in')
 plot(out1.sp.trace$alpha.samples, density = TRUE, las=1)
@@ -154,7 +153,7 @@ plot(out1.sp.trace$theta.samples,  density = TRUE, las=1)
 dev.off()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-# SPATIAL MODEL 2 # occ ~  1, det ~ Year #
+# SPATIAL MODEL 2
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 tiff("Results/2011-2016-2022/Traceplots/SPM2_det_2011_2016_2022.tiff", res=800, height=3, width=7.5, units='in')
 plot(out2.sp.trace$alpha.samples, density = TRUE, las=1)
@@ -169,7 +168,7 @@ plot(out2.sp.trace$theta.samples,  density = TRUE, las=1)
 dev.off()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-# SPATIAL MODEL 3 # occ ~ 1, det ~ Depth #
+# SPATIAL MODEL 3
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 tiff("Results/2011-2016-2022/Traceplots/SPM3_det_2011_2016_2022.tiff", res=800, height=3, width=7.5, units='in')
 plot(out3.sp.trace$alpha.samples, density = TRUE, las=1)
@@ -184,7 +183,7 @@ plot(out3.sp.trace$theta.samples,  density = TRUE, las=1)
 dev.off()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-# SPATIAL MODEL 4 # occ ~ Depth, det ~ 1 #
+# SPATIAL MODEL 4
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 tiff("Results/2011-2016-2022/Traceplots/SPM4_det_2011_2016_2022.tiff", res=800, height=3, width=7.5, units='in')
 plot(out4.sp.trace$alpha.samples, density = TRUE, las=1)

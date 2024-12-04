@@ -1,12 +1,15 @@
 ################################################################################
 ################################################################################
-# Check out model coefficients
+# Plot model coefficients
+# RScript01.4-Occupancy-2011_2016_2022-Model_Coefficients.R 
+# This is Script 4 of occupancy modelling
+# This script is used to plot model coefficients for single-species occupancy 
+# models built for Silver Shiner using data collected from 16 Mile Creek in 2011, 
+# 2016, and 2022.
 ################################################################################
 ################################################################################
 # load packages
-library(pacman)     # downloads and loads packages simultaneously
-p_load(ggplot2)     # nice plots
-p_load(patchwork)   # combine ggplots
+library(ggplot2) 
 
 # Personal ggplot theme
 theme_set(theme_bw() + 
@@ -20,12 +23,11 @@ theme_set(theme_bw() +
                   axis.ticks   = element_line(colour = "black"),
                   legend.background = element_blank()))
 
-################################################################################
-# Create plot
+# Import data
 ModelCoefs.tot<- read.csv("Results/2011-2016-2022/Models/Model.coefficients.2011-2016-2022.csv", header=T)
 ModelCoefs.tot
 
-# Remove spatial variables
+# Remove spatial variables and only include top models
 ModelCoefs.tot1 <- ModelCoefs.tot[ModelCoefs.tot$ModelNo=="Model 6" |
                                    ModelCoefs.tot$ModelNo=="Model 4 - spatial",]
 ModelCoefs.tot1 <- ModelCoefs.tot1[!ModelCoefs.tot1$Variable=="sigma^2",]
@@ -44,6 +46,7 @@ ModelCoefs.tot1$Submodel <- factor(ModelCoefs.tot1$Submodel,
 # only occupancy
 Occ.Coefs.tot1 <- ModelCoefs.tot1[ModelCoefs.tot1$Submodel == "Occupancy Pr.",]
 
+# plot
 dat_text2 <- data.frame(label =  "a)", Submodel = "Occupancy Pr.", Mean = -1.75, Variable = 4.3)
 Occ.var.gg<-ggplot(Occ.Coefs.tot1, aes(x=Mean, y=Variable))+
   geom_vline(xintercept = 0, linetype='dashed') +
