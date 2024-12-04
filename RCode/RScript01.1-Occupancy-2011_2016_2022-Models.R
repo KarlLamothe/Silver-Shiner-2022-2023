@@ -1,14 +1,15 @@
 ################################################################################
 ################################################################################
 # Occupancy model analysis of Silver Shiner data using spOccupancy package
+# RScript01.1-Occupancy-2011_2016_2022-Models.R 
+# This is Script 1 of occupancy modelling
+# This script is used to build single species occupancy models for Silver Shiner
+# using data collected from 16 Mile Creek in 2011, 2016, and 2022. 
 ################################################################################
 ################################################################################
 # load packages
 library(pacman)     # downloads and loads packages simultaneously
-p_load(ggplot2)     # nice plots
 p_load(spOccupancy) # occupancy models
-p_load(patchwork)   # combine ggplots
-p_load(reshape2)    # reshape data frames
 p_load(oce)         # convert coords to UTM
 p_load(xlsx)        # import xlsx files
 p_load(beepr)       # alarm when models finish
