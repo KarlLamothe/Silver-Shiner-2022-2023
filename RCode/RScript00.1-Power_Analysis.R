@@ -1,8 +1,9 @@
 ################################################################################
 ################################################################################
 # Prospective power analysis for occupancy models
+# Written by Karl Lamothe
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-# Presence-absence data are simulated to reflect proportional declines in 
+# Presence-absence data are simulated to reflect proportional changes in 
 # occupancy probability between two periods. For each simulation, an occupancy
 # model is developed with sampling period as an occupancy covariate. Power to 
 # detect a change is estimated as the proportion of simulations with a 
